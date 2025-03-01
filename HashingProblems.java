@@ -1,5 +1,5 @@
 /*
- * *** YOUR NAME GOES HERE / YOUR SECTION NUMBER ***
+ * *** Fiore Cassettari / 002 ***
  *
  * This HashingProblems object contains three methods / problems that you must
  * complete utilize the HashMap object within the Java's Collection Framework Library.
@@ -32,15 +32,18 @@ class HashingProblems {
      */
 
     public double getAverage(HashMap<Integer, Integer> map, int[] array) {
+        //using an arraylist to conveniently store items
+        ArrayList<Integer> values = new ArrayList<>();
 
-        /*
-         * ADD YOUR CODE HERE - DO NOT FORGET TO ADD YOU NAME AT TOP OF FILE
-         *
-         * Note: if NO values found in common between the HashMap and supplied array,
-         * returning 0.0 is NOT correct, as that is not the average value. Whereas
-         * returning 0.0/0.0 IS correct (which would return a non-number).
-         */
+        for (int item : array) {
+            if (map.containsKey(item)) { values.add(map.get(item)); }
+        }
 
+        if (!values.isEmpty()) {
+            int total = 0;
+            for (int item : values) { total+=item; }
+            return (double)total/values.size(); //cast as a double to pass the second test
+        }
          return 0.0 / 0.0;
   }
 
@@ -55,13 +58,8 @@ class HashingProblems {
   public ArrayList<String> odd(HashMap<Integer, String> map) {
     
       ArrayList<String> result = new ArrayList<>();
-
-      /*
-       * ADD YOUR CODE HERE
-       *
-       * Hint: Consider iterating over the HashMap using the keySet method.
-       */
-
+      //for each item in the keyset, if it modulo 2 isn't zero, then it's odd
+      for (int item : map.keySet()) { if (item%2 != 0) result.add(map.get(item)); }
 
       return result;
   }
@@ -104,13 +102,17 @@ class HashingProblems {
    * NOTE: Solving using a HashMap or HashSet is fine (either is okay). HashSet may be easier to code?
    */
 
-  public int twoSums(int[] numbers, int k) {
+    public int twoSums(int[] numbers, int k) {
+        HashSet<Integer> map = new HashSet<>();
+        int output = 0;
 
-      /*
-       * ADD YOUR CODE HERE
-       */
+        for (int item : numbers) {
+            map.add(item);
+        }
 
-      return -1;
-  }
+        for (int item : numbers) { if (map.contains(item + k)) output++; }
+
+        return output;
+    }
 
 } /* end class HashingProblems */
